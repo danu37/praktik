@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulir Identitas Siswa</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 30px 15px;
+        }
+
+        .container {
+            max-width: 450px;
+            margin: 30px auto;
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #166534;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        input:focus {
+            outline: 2px solid #86efac;
+            border-color: #15803d;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 20px;
+            padding: 12px;
+            background-color: #15803d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #166534;
+        }
+
+        .pesan {
+            margin-top: 20px;
+            padding: 12px;
+            background-color: #dcfce7;
+            color: #166534;
+            border-radius: 5px;
+        }
+
+        .error {
+            background-color: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .hasil {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8fafc;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow-wrap: anywhere;
+        }
+
+        .hasil h3 {
+            color: #166534;
+        }
+
+        .hasil p {
+            line-height: 1.6;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>Formulir Identitas Siswa</h2>
+
+    <form id="formIdentitas">
+
+        <label for="nama">Nama Lengkap</label>
+        <input
+            type="text"
+            id="nama"
+            name="nama"
+            placeholder="Masukkan nama lengkap"
+            required
+        >
+
+        <label for="kelas">Kelas</label>
+        <input
+            type="text"
+            id="kelas"
+            name="kelas"
+            placeholder="Contoh: XI RPL 1"
+            required
+        >
+
+        <label for="jurusan">Jurusan</label>
+        <input
+            type="text"
+            id="jurusan"
+            name="jurusan"
+            placeholder="Contoh: Rekayasa Perangkat Lunak"
+            required
+        >
+
+        <button type="submit">Kirim</button>
+
+    </form>
+
+    <div id="pesan" class="pesan" hidden></div>
+
+    <div id="hasil" class="hasil" hidden>
+        <h3>Data Identitas Siswa</h3>
+
+        <p><strong>Nama:</strong> <span id="hasilNama"></span></p>
+        <p><strong>Kelas:</strong> <span id="hasilKelas"></span></p>
+        <p><strong>Jurusan:</strong> <span id="hasilJurusan"></span></p>
+    </div>
+
+</div>
+
+<script>
+    const form = document.getElementById("formIdentitas");
+    const pesan = document.getElementById("pesan");
+    const hasil = document.getElementById("hasil");
+
+    form.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const nama = document.getElementById("nama").value.trim();
+        const kelas = document.getElementById("kelas").value.trim();
+        const jurusan = document.getElementById("jurusan").value.trim();
+
+        // Validasi input kosong
+        if (!nama || !kelas || !jurusan) {
+            pesan.textContent = "Semua kolom wajib diisi!";
+            pesan.className = "pesan error";
+            pesan.hidden = false;
+            hasil.hidden = true;
+            return;
+        }
+
+        // Tampilkan pesan keberhasilan
+        pesan.textContent = "Data identitas siswa berhasil dikirim!";
+        pesan.className = "pesan";
+        pesan.hidden = false;
+
+        // Tampilkan data dengan aman sebagai teks biasa
+        document.getElementById("hasilNama").textContent = nama;
+        document.getElementById("hasilKelas").textContent = kelas;
+        document.getElementById("hasilJurusan").textContent = jurusan;
+
+        hasil.hidden = false;
+    });
+</script>
+
+</body>
+</html>
